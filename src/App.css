@@ -14,6 +14,8 @@
   z-index: 1;
 }
 
+.Nav-Bar-User-Login,
+.Nav-Bar-Sign-Up,
 .Nav-Bar-Shopping-Cart {
   padding: 20px 30px 0 0;
   cursor: pointer;
