@@ -1,4 +1,4 @@
-function NavBar({isShoppingCartVisible, setIsShoppingCartVisible, isUserLoggedIn, setIsUserLoggedIn, setIsLoginFormVisible}) {
+function NavBar({currentUser, isShoppingCartVisible, setIsShoppingCartVisible, isUserLoggedIn, setIsUserLoggedIn, setIsLoginFormVisible}) {
     
     const toggleShowShoppingCart = () => {
         setIsShoppingCartVisible(!isShoppingCartVisible)
@@ -8,7 +8,7 @@ function NavBar({isShoppingCartVisible, setIsShoppingCartVisible, isUserLoggedIn
         setIsShoppingCartVisible(false)
         setIsUserLoggedIn(false)
     }
-
+    
     return (
         <>
             <div className="Store-Title">
@@ -17,6 +17,9 @@ function NavBar({isShoppingCartVisible, setIsShoppingCartVisible, isUserLoggedIn
             <div className="Nav-Bar-Links">
                 {(isUserLoggedIn) ?
                     <>
+                        <div className="Nav-Bar-Welcome">
+                            <p>Welcome, {currentUser.firstname}!</p>
+                        </div>
                         <div className="Nav-Bar-Shopping-Cart">
                             <i className="fa fa-shopping-cart" onClick={toggleShowShoppingCart}></i>
                         </div>
@@ -25,6 +28,9 @@ function NavBar({isShoppingCartVisible, setIsShoppingCartVisible, isUserLoggedIn
                         </div>
                     </> :
                     <>
+                        <div className="Nav-Bar-Welcome">
+                            <p>Sign-in to begin shopping!</p>
+                        </div>
                         <div className="Nav-Bar-User-Login">
                             <i className="fa fa-sign-in" title="Sign-In" onClick={() => setIsLoginFormVisible(true)}></i>
                         </div>

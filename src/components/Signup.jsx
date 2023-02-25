@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
-function SignUp(setIsUserLoggedIn, setIsSignupFormVisible) {
+function SignUp({setCurrentUser, setIsUserLoggedIn, setIsSignupFormVisible}) {
+    const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({
         email: '',
         username: '',
@@ -8,6 +9,20 @@ function SignUp(setIsUserLoggedIn, setIsSignupFormVisible) {
         firstname: '',
         lastname: ''
     });
+
+    const clearForm = () => {
+        setFormData({
+            email: '',
+            username: '',
+            password: '',
+            firstname: '',
+            lastname: ''
+        })
+     }
+
+    const toggleShowPassword = () => {
+        setShowPassword(!showPassword);
+    };
 
     const handleFormChange = (event) => {
         const { name, value } = event.target;
@@ -29,6 +44,8 @@ function SignUp(setIsUserLoggedIn, setIsSignupFormVisible) {
         const response = await fetch(`http://localhost:3000/users/signup`, options)
         const sqlQuery = await response.json()
         if (sqlQuery.validation) {
+            clearForm()
+            setCurrentUser(sqlQuery.data[0])
             setIsSignupFormVisible(false)
             setIsUserLoggedIn(true)
         }
@@ -36,27 +53,31 @@ function SignUp(setIsUserLoggedIn, setIsSignupFormVisible) {
 
     return ( 
         <>
-            <div>
+            <div className='User-Form-Close-Btn-Container'>
                 <button id='User-Form-Close-Btn' onClick={() => setIsSignupFormVisible(false)}>X</button>
             </div>
             <div>
-                <h1>Sign Up</h1>
+                <h1>Account Sign Up</h1>
+            </div>
+            <div>
+                <p>Please complete for account registration:</p>
             </div>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <input type="email" name="email" id="email-input" value={formData.email} onChange={handleFormChange} placeholder='Email' />
+                    <input type="email" name="email" id="signup-email-input" value={formData.email} onChange={handleFormChange} placeholder='Email' required/>
                 </div>
                 <div>
-                    <input type="text" name="username" id="username-input" value={formData.username} onChange={handleFormChange} placeholder='Username' />
+                    <input type="text" name="username" id="signup-username-input" value={formData.username} onChange={handleFormChange} placeholder='Username' required/>
+                </div>
+                <div className='Signup-Password-Container'>
+                    <input type={showPassword ? 'text' : 'password'} name="password" id="signup-password-input" value={formData.password} onChange={handleFormChange} placeholder='Password' required/>
+                    <i className={showPassword ?  "fa fa-eye" : "fa fa-eye-slash"} onClick={toggleShowPassword}></i>
                 </div>
                 <div>
-                    <input type="password" name="password" id="password-input" value={formData.password} onChange={handleFormChange} placeholder='Password' />
+                    <input type="text" name="firstname" id="signup-firstname-input" value={formData.firstname} onChange={handleFormChange} placeholder='First Name' required/>
                 </div>
                 <div>
-                    <input type="text" name="firstname" id="firstname-input" value={formData.firstname} onChange={handleFormChange} placeholder='First Name' />
-                </div>
-                <div>
-                    <input type="text" name="lastname" id="lastname-input" value={formData.lastname} onChange={handleFormChange} placeholder='Last Name' />
+                    <input type="text" name="lastname" id="signup-lastname-input" value={formData.lastname} onChange={handleFormChange} placeholder='Last Name' required/>
                 </div>
                 <button type="submit">Create Account</button>
             </form>

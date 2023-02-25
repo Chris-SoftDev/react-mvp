@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import bcrypt from "bcrypt";
 import db from "./db.js";
 import cors from "cors";
 
@@ -21,11 +22,20 @@ app.route("/users/login").post(async (req, res) => {
   const { body } = req;
   try {
     const data = await db.query(
-      `SELECT user_id FROM users WHERE username = '${body.username}' AND password = '${body.password}'`
+      `SELECT user_id, firstname, password FROM users WHERE username = '${body.username}'`
     );
-    data.rows.length !== 0
-      ? res.status(200).json({ validation: true, data: data.rows })
-      : res.status(404).json({ validation: false });
+    if (data.rows.length !== 0) {
+      const match = await bcrypt.compare(body.password, data.rows[0].password);
+      if (match) {
+        res.status(200).json({ validation: true, data: data.rows });
+      } else {
+        res
+          .status(401)
+          .json({ validation: false, message: "Invalid password" });
+      }
+    } else {
+      res.status(404).json({ validation: false, message: "User not found" });
+    }
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -34,11 +44,13 @@ app.route("/users/login").post(async (req, res) => {
 app.route("/users/signup").post(async (req, res) => {
   const { body } = req;
   try {
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(body.password, salt);
     await db.query(
-      `INSERT INTO users (email, username, password, firstname, lastname) VALUES ('${body.email}', '${body.username}', '${body.password}', '${body.firstname}', '${body.lastname}');`
+      `INSERT INTO users (email, username, password, firstname, lastname) VALUES ('${body.email}', '${body.username}', '${hashedPassword}', '${body.firstname}', '${body.lastname}');`
     );
     const data = await db.query(
-      `SELECT user_id FROM users WHERE username = '${body.username}' AND password = '${body.password}'`
+      `SELECT user_id, firstname FROM users WHERE username = '${body.username}'`
     );
     res.status(200).json({ validation: true, data: data.rows });
   } catch (error) {

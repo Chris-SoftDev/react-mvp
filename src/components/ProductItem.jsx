@@ -15,7 +15,7 @@ function ProductItem({product, isUserLoggedIn}) {
     return ( 
         <div className="Product-Item" id={product.id}>
             <div className="Product-Item-Image">
-                <img src={product.image} alt={product.title}></img>
+                <img src={product.image} alt={product.title} title={product.description}></img>
             </div>
             <div className="Product-Item-Title">{product.title}</div>
             <div className="Product-Item-Price">${product.price.toFixed(2)}</div>

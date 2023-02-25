@@ -5,6 +5,10 @@
   padding: 0;
 }
 
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 .App {
   display: flex;
   flex-direction: column;
@@ -111,51 +115,76 @@
   position: fixed;
   right: 0;
   height: 100vh;
-  border-left: 2px solid black;
+  border-left: 2px solid gray;
+}
+
+.Shopping-Cart-Header {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0 50px 0;
+}
+
+.Shopping-Cart-Item-Listing-Container {
+  padding: 0 10px;
+}
+
+.Shopping-Cart-Item {
+  margin-bottom: 20px;
+}
+
+.User-Form-Close-Btn-Container {
+  display: flex;
+  width: 100%;
+  padding: 5px 15px 0 0;
+  justify-content: flex-end;
 }
 
 #User-Form-Close-Btn {
+  background-color: #f5f5fa;
   outline: none;
   border: none;
-  margin-bottom: 10px;
   cursor: pointer;
+}
+
+#User-Form-Close-Btn:hover {
+  font-weight: bold;
 }
 
 .User-Login-Form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: fixed;
-  top:250px;
-  left: 750px;
+  position: absolute;
+  top: 30%;
+  left: 41%;
   width: 400px;
   height: 300px;
   border: 2px solid black;
+  border-radius: 5px;
+  box-shadow: 2px 2px 1px 1px rgb(190, 190, 190);
   background-color: #f5f5fa;
   z-index: 1;
 }
 
 .User-Login-Form h1 {
-  margin-bottom: 50px;
+  margin-bottom: 35px;
 }
 
 .User-Login-Form input {
-  width: 200px;
+  width: 220px;
+  height: 30px;
+  padding-left: 5px;
   outline: none;
-  border-bottom: 2px solid #1f1f29;
+  border-radius: 4px;
 }
 
-#username-input {
-  margin-bottom: 30px;
-}
-
-#password-input {
+#login-password-input {
   margin-bottom: 5px;
 }
 
 .User-Login-Form form button {
   outline: none;
-  padding: 2px 8px;
+  padding: 2px 10px;
   cursor: pointer;
 }
 
@@ -164,6 +193,7 @@
   justify-content: space-between;
   font-size: 12px;
   margin-bottom: 30px;
+  padding: 0 2px;
   cursor: pointer;
 }
 
@@ -178,26 +208,75 @@
   align-items: center;
   position: fixed;
   top:250px;
-  left: 750px;
+  left: 41%;
   width: 400px;
-  height: 300px;
+  height: 450px;
   border: 2px solid black;
+  border-radius: 5px;
+  box-shadow: 2px 2px 1px 1px rgb(190, 190, 190);
   background-color: #f5f5fa;
   z-index: 1;
+  text-align: center;
 }
 
 .User-Signup-Form h1 {
-  margin-bottom: 35px;
+  margin-bottom: 25px;
+}
+
+.User-Signup-Form p {
+  font-size: 13px;
+  margin-bottom: 20px;
 }
 
 .User-Signup-Form input {
   width: 200px;
+  height: 30px;
+  padding-left: 5px;
   outline: none;
-  border-bottom: 2px solid #1f1f29;
+  border-radius: 4px;
+  margin-bottom: 15px;
 }
 
 .User-Signup-Form form button {
   outline: none;
-  padding: 2px 8px;
+  margin-top: 20px;
+  padding: 2px 10px;
   cursor: pointer;
+}
+
+.Nav-Bar-Welcome p{
+  width: 300px;
+  font-size: 14px;
+  text-align: right;
+  padding: 20px 35px 0 0;
+}
+
+.Login-Error {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 11px;
+  height: 10px;
+  color: red;
+  margin-left: 3px;
+  margin-bottom: 15px;
+}
+
+.Login-Password-Container i {
+  position: absolute;
+  top: 56%;
+  right: 14%;
+}
+
+.Signup-Password-Container i {
+  position: absolute;
+  top: 52%;
+  right: 17%;
+}
+
+.fa-eye {
+  cursor: pointer;
+}
+
+.fa-eye-slash {
+  cursor: pointer;
+  color: lightgray;
 }
