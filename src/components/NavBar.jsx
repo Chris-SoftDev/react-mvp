@@ -1,43 +1,38 @@
-import React, { useState } from 'react';
-
-function NavBar({showShoppingCart, setShowShoppingCart}) {
-    const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
+function NavBar({isShoppingCartVisible, setIsShoppingCartVisible, isUserLoggedIn, setIsUserLoggedIn, setIsLoginFormVisible}) {
     
-    const handleShowShoppingCart = () => {
-        setShowShoppingCart(!showShoppingCart)
-    }
-
-    const setUserLoggedIn = () => {
-        setIsUserLoggedIn(true)
+    const toggleShowShoppingCart = () => {
+        setIsShoppingCartVisible(!isShoppingCartVisible)
     }
 
     const setUserLoggedOut = () => {
-        setShowShoppingCart(false)
+        setIsShoppingCartVisible(false)
         setIsUserLoggedIn(false)
     }
 
     return (
         <>
-            {(isUserLoggedIn) ?
-                <>
-                    <div className="Nav-Bar-Shopping-Cart">
-                        <i className="fa fa-shopping-cart" onClick={handleShowShoppingCart}></i>
-                    </div>
-                    <div className="Nav-Bar-User-Login">
-                        <i className="fa fa-sign-out" title="Log-Out" onClick={setUserLoggedOut}></i>
-                    </div>
-                </> :
-                <>
-                    <div className="Nav-Bar-Sign-Up">
-                        <i className="fa fa-user-plus" title="Signup"></i>
-                    </div>
-                    <div className="Nav-Bar-User-Login">
-                        <i className="fa fa-sign-in" title="Log-In" onClick={setUserLoggedIn}></i>
-                    </div>
-                </>
-            }
+            <div className="Store-Title">
+                <h1>REACT MVP STORE</h1>
+            </div>
+            <div className="Nav-Bar-Links">
+                {(isUserLoggedIn) ?
+                    <>
+                        <div className="Nav-Bar-Shopping-Cart">
+                            <i className="fa fa-shopping-cart" onClick={toggleShowShoppingCart}></i>
+                        </div>
+                        <div className="Nav-Bar-User-Login">
+                            <i className="fa fa-sign-out" title="Sign-Out" onClick={setUserLoggedOut}></i>
+                        </div>
+                    </> :
+                    <>
+                        <div className="Nav-Bar-User-Login">
+                            <i className="fa fa-sign-in" title="Sign-In" onClick={() => setIsLoginFormVisible(true)}></i>
+                        </div>
+                    </>
+                }
+            </div>
         </> 
-     );
+    );
 }
 
 export default NavBar;
