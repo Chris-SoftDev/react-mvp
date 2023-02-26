@@ -25,6 +25,26 @@ function App() {
     fetchProducts();
   }, []);
 
+  useEffect(() => {
+    const updateUserShoppingCart = async () => {
+      const options = {
+        method: "PATCH",
+        headers: {
+          Accept: "application/json",
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          userData: currentUser,
+          cartData: currentShoppingCart,
+        }),
+      };
+
+      await fetch(`http://localhost:3000/cart/update`, options);
+    };
+
+    isUserLoggedIn && updateUserShoppingCart();
+  }, [isUserLoggedIn, currentUser, currentShoppingCart]);
+
   // Disables vertical scroll-bar when Login window is visible
   useEffect(() => {
     isLoginFormVisible
@@ -101,6 +121,7 @@ function App() {
             setIsUserLoggedIn={setIsUserLoggedIn}
             setIsLoginFormVisible={setIsLoginFormVisible}
             setIsSignupFormVisible={setIsSignupFormVisible}
+            setCurrentShoppingCart={setCurrentShoppingCart}
           />
         </div>
       )}

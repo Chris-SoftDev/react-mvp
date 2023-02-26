@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 
-function LogIn({setCurrentUser, setIsUserLoggedIn, setIsLoginFormVisible, setIsSignupFormVisible}) {
+function LogIn({setCurrentUser, setIsUserLoggedIn, setIsLoginFormVisible, setIsSignupFormVisible, setCurrentShoppingCart}) {
     const [showPassword, setShowPassword] = useState(false);
     const [loginError, setLoginError] = useState('')
     const [formData, setFormData] = useState({
         username: '',
         password: '',
+        date: new Date().toISOString()
     });
 
     const toggleShowPassword = () => {
@@ -16,6 +17,7 @@ function LogIn({setCurrentUser, setIsUserLoggedIn, setIsLoginFormVisible, setIsS
        setFormData({
         username: '',
         password: '',
+        date: 0
        })
     }
 
@@ -43,6 +45,7 @@ function LogIn({setCurrentUser, setIsUserLoggedIn, setIsLoginFormVisible, setIsS
             setCurrentUser(sqlQuery.data[0])
             setIsLoginFormVisible(false)
             setIsUserLoggedIn(true)
+            setCurrentShoppingCart(sqlQuery.cartData)
         } else {
             clearForm()
             setLoginError(sqlQuery.message.toUpperCase())

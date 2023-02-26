@@ -1,7 +1,4 @@
-import React, { useState } from 'react';
-
 function ProductItem({product, isUserLoggedIn, currentShoppingCart, setCurrentShoppingCart}) {
-    const [inCart, setInCart] = useState(false);
 
     const productStarRating = (rating) => {
         const starNum = Math.round(rating);
@@ -12,15 +9,26 @@ function ProductItem({product, isUserLoggedIn, currentShoppingCart, setCurrentSh
         return starRating
     }
 
+    const escapeSpecialChars = (str) => {
+        return str.replace(/'/g, "\\'");
+    }
+
+    const searchId = (id, cart) => {
+        return cart.find(obj => obj.id === id)
+    }
+
     const handleAddToCart = () => {
         const newShoppingCart = [...currentShoppingCart]; // create a copy of the current cart
-        const modifiedProduct = product;
+        const modifiedProduct = Object.assign({}, product); // create a clone of the current product
+        delete modifiedProduct.category;
+        delete modifiedProduct.description;
+        delete modifiedProduct.rating;
+        modifiedProduct.title = escapeSpecialChars(modifiedProduct.title);
         modifiedProduct.quantity = 1;
         newShoppingCart.push(modifiedProduct); // add the current product to the copy
         setCurrentShoppingCart(newShoppingCart); // update the state of the parent component
-        setInCart(true); // update the state of the current component
     };
-
+    
     return ( 
         <div className="Product-Item" id={product.id}>
             <div className="Product-Item-Image">
@@ -29,7 +37,7 @@ function ProductItem({product, isUserLoggedIn, currentShoppingCart, setCurrentSh
             <div className="Product-Item-Title">{product.title}</div>
             <div className="Product-Item-Price">${product.price.toFixed(2)}</div>
             <div className="Product-Item-Rating">{productStarRating(product.rating.rate)}</div>
-            {isUserLoggedIn && (inCart ? 
+            {isUserLoggedIn && ((searchId(product.id, currentShoppingCart)) ? 
                     <div className="Product-Item-Btn">
                         <button 
                         disabled

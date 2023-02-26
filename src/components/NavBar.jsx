@@ -8,6 +8,13 @@ function NavBar({currentUser, currentShoppingCart, isShoppingCartVisible, setIsS
         setIsShoppingCartVisible(false)
         setIsUserLoggedIn(false)
     }
+
+    const showLoginForm = () => {
+        // Scrolls screen to top, for displaying login form before locking scroll in App.js when LoginForm is visible
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        setIsLoginFormVisible(true)
+    }
     
     return (
         <>
@@ -39,7 +46,7 @@ function NavBar({currentUser, currentShoppingCart, isShoppingCartVisible, setIsS
                             <p>Sign-in to begin shopping!</p>
                         </div>
                         <div className="Nav-Bar-User-Login">
-                            <i className="fa fa-sign-in" title="Sign-In" onClick={() => setIsLoginFormVisible(true)}></i>
+                            <i className="fa fa-sign-in" title="Sign-In" onClick={showLoginForm}></i>
                         </div>
                     </>
                 }
