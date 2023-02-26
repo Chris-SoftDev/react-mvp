@@ -131,6 +131,7 @@ function App() {
             setCurrentUser={setCurrentUser}
             setIsUserLoggedIn={setIsUserLoggedIn}
             setIsSignupFormVisible={setIsSignupFormVisible}
+            setCurrentShoppingCart={setCurrentShoppingCart}
           />
         </div>
       )}

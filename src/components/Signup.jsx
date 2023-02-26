@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 
-function SignUp({setCurrentUser, setIsUserLoggedIn, setIsSignupFormVisible}) {
+function SignUp({setCurrentUser, setIsUserLoggedIn, setIsSignupFormVisible, setCurrentShoppingCart}) {
     const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({
         email: '',
         username: '',
         password: '',
         firstname: '',
-        lastname: ''
+        lastname: '',
+        date: new Date().toISOString()
     });
 
     const clearForm = () => {
@@ -16,7 +17,8 @@ function SignUp({setCurrentUser, setIsUserLoggedIn, setIsSignupFormVisible}) {
             username: '',
             password: '',
             firstname: '',
-            lastname: ''
+            lastname: '',
+            date: 0
         })
      }
 
@@ -48,6 +50,7 @@ function SignUp({setCurrentUser, setIsUserLoggedIn, setIsSignupFormVisible}) {
             setCurrentUser(sqlQuery.data[0])
             setIsSignupFormVisible(false)
             setIsUserLoggedIn(true)
+            setCurrentShoppingCart(sqlQuery.cartData)
         }
     }
 

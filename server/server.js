@@ -1,9 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
 import bcrypt from "bcrypt";
-import db from "./db.js";
 import cors from "cors";
-import e from "express";
+import db from "./db.js";
 
 dotenv.config({ path: "./server/.env" });
 
