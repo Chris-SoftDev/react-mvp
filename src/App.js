@@ -9,11 +9,7 @@ import SignUp from "./components/Signup.jsx";
 function App() {
   const [products, setProducts] = useState([]);
   const [currentUser, setCurrentUser] = useState({});
-  const [currentShoppingCart, setCurrentShoppingCart] = useState([
-    { productId: 1, quantity: 4 },
-    { productId: 2, quantity: 1 },
-    { productId: 3, quantity: 6 },
-  ]);
+  const [currentShoppingCart, setCurrentShoppingCart] = useState([]);
   const [isShoppingCartVisible, setIsShoppingCartVisible] = useState(false);
   const [isLoginFormVisible, setIsLoginFormVisible] = useState(false);
   const [isSignupFormVisible, setIsSignupFormVisible] = useState(false);
@@ -29,13 +25,14 @@ function App() {
     fetchProducts();
   }, []);
 
-  // Disables vertical scroll-bar when login window is visible
+  // Disables vertical scroll-bar when Login window is visible
   useEffect(() => {
     isLoginFormVisible
       ? (document.body.style.overflow = "hidden")
       : (document.body.style.overflow = "auto");
   }, [isLoginFormVisible]);
 
+  // Disables vertical scroll-bar when Signup window is visible
   useEffect(() => {
     isSignupFormVisible
       ? (document.body.style.overflow = "hidden")
@@ -47,6 +44,7 @@ function App() {
       <div className="Nav-Bar-Container">
         <NavBar
           currentUser={currentUser}
+          currentShoppingCart={currentShoppingCart}
           isShoppingCartVisible={isShoppingCartVisible}
           setIsShoppingCartVisible={setIsShoppingCartVisible}
           isUserLoggedIn={isUserLoggedIn}
@@ -71,11 +69,13 @@ function App() {
               <ProductListing
                 products={products}
                 isUserLoggedIn={isUserLoggedIn}
+                currentShoppingCart={currentShoppingCart}
+                setCurrentShoppingCart={setCurrentShoppingCart}
               />
             </div>
             <div className="Shopping-Cart">
               <ShoppingCart
-                currentUser={currentUser}
+                setIsShoppingCartVisible={setIsShoppingCartVisible}
                 currentShoppingCart={currentShoppingCart}
                 setCurrentShoppingCart={setCurrentShoppingCart}
               />
@@ -87,6 +87,8 @@ function App() {
               <ProductListing
                 products={products}
                 isUserLoggedIn={isUserLoggedIn}
+                currentShoppingCart={currentShoppingCart}
+                setCurrentShoppingCart={setCurrentShoppingCart}
               />
             </div>
           </>

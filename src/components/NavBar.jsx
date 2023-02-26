@@ -1,4 +1,4 @@
-function NavBar({currentUser, isShoppingCartVisible, setIsShoppingCartVisible, isUserLoggedIn, setIsUserLoggedIn, setIsLoginFormVisible}) {
+function NavBar({currentUser, currentShoppingCart, isShoppingCartVisible, setIsShoppingCartVisible, isUserLoggedIn, setIsUserLoggedIn, setIsLoginFormVisible}) {
     
     const toggleShowShoppingCart = () => {
         setIsShoppingCartVisible(!isShoppingCartVisible)
@@ -21,7 +21,14 @@ function NavBar({currentUser, isShoppingCartVisible, setIsShoppingCartVisible, i
                             <p>Welcome, {currentUser.firstname}!</p>
                         </div>
                         <div className="Nav-Bar-Shopping-Cart">
-                            <i className="fa fa-shopping-cart" onClick={toggleShowShoppingCart}></i>
+                            <i className="fa fa-shopping-cart" onClick={toggleShowShoppingCart}>
+                                <button 
+                                    id='Shopping-Cart-Icon-Qty' 
+                                    style={currentShoppingCart.length > 0 ? {visibility: 'visible'} : {visibility: 'hidden'} }
+                                    onClick={toggleShowShoppingCart}
+                                >{currentShoppingCart.length}
+                                </button>
+                            </i>
                         </div>
                         <div className="Nav-Bar-User-Login">
                             <i className="fa fa-sign-out" title="Sign-Out" onClick={setUserLoggedOut}></i>

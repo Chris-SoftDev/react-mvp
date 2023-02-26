@@ -118,18 +118,158 @@ body {
   border-left: 2px solid gray;
 }
 
-.Shopping-Cart-Header {
+#Shopping-Cart-Icon-Qty {
+  position: relative;
+  bottom: 13px;
+  right: 8px;
+  padding: 3px 6px;
+  outline: none;
+  border: none;
+  border-radius: 50%;
+  font-size: 9px;
+  color: white;
+  background-color: red;
+  cursor: pointer;
+}
+
+.Shopping-Cart-Header-Container {
   display: flex;
   justify-content: space-between;
   margin: 20px 0 50px 0;
 }
 
+.Shopping-Cart-Header-Btn {
+  display: flex;
+}
+
+.Shopping-Cart-Header-Btn i {
+  margin-top: 4px;
+  color: gray;
+  cursor: pointer;
+}
+
+.Shopping-Cart-Header-Btn i:hover {
+  color: #1f1f29;
+}
+
+.Shopping-Cart-Header-Btn h4 {
+  margin-left: 15px;
+}
+
 .Shopping-Cart-Item-Listing-Container {
-  padding: 0 10px;
+  width: 100%;
+  padding: 0 0 0 10px;
 }
 
 .Shopping-Cart-Item {
-  margin-bottom: 20px;
+  display: flex;
+  margin-bottom: 40px;
+}
+
+.Item-Image-Container img {
+  width: 50px;
+  margin-right:30px;
+}
+
+.Item-Details-Container {
+  display: flex;
+  flex-direction: column;
+}
+
+.Item-Details {
+  display: flex;
+  justify-content: space-between;
+  width: 20vw;
+  font-size: 12px;
+}
+
+.Item-Controls {
+  display: flex;
+  justify-content: space-between;
+  width: 20vw;
+  padding-top: 20px;
+}
+
+.Item-Qty-Controls {
+  display: flex;
+}
+
+#Item-Qty-Decrease {
+  border: 1px solid black;
+  padding: 2px 12px;
+  cursor: pointer;
+}
+
+#Item-Qty-Decrease:hover {
+  background-color: #1f1f29;
+  color: #f5f5fa;
+}
+
+#Item-Qty {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  padding: 2px 12px;
+}
+
+#Item-Qty-Increase {
+  border: 1px solid black;
+  padding: 2px 12px;
+  cursor: pointer;
+}
+
+#Item-Qty-Increase:hover {
+  background-color: #1f1f29;
+  color: #f5f5fa;
+}
+
+.Item-Remove-Control i {
+  color: rgba(255, 0, 0, 0.50);
+  cursor: pointer;
+}
+
+.Item-Remove-Control i:hover {
+  color: rgba(255, 0, 0, 1);
+}
+
+.Shopping-Cart-Subtotal-Container {
+  display: flex;
+  width: 22vw;
+  justify-content: space-between;
+  padding-left: 30px;
+  position: fixed;
+  bottom: 4vw;
+}
+
+.Shopping-Cart-Subtotal-Header {
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.Shopping-Cart-Subtotal {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.Shopping-Cart-Pay {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 22vw;
+  justify-content: center;
+  position: fixed;
+  bottom: 1vw;
+}
+
+.Shopping-Cart-Pay button {
+  outline: none;
+  border: none;
+  width: 350px;
+  margin-left: 70px;
+  padding: 12px;
+  color: #f5f5fa;
+  background-color: red;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .User-Form-Close-Btn-Container {

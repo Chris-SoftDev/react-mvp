@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function ProductItem({product, isUserLoggedIn}) {
+function ProductItem({product, isUserLoggedIn, currentShoppingCart, setCurrentShoppingCart}) {
     const [inCart, setInCart] = useState(false);
 
     const productStarRating = (rating) => {
@@ -11,6 +11,15 @@ function ProductItem({product, isUserLoggedIn}) {
         }
         return starRating
     }
+
+    const handleAddToCart = () => {
+        const newShoppingCart = [...currentShoppingCart]; // create a copy of the current cart
+        const modifiedProduct = product;
+        modifiedProduct.quantity = 1;
+        newShoppingCart.push(modifiedProduct); // add the current product to the copy
+        setCurrentShoppingCart(newShoppingCart); // update the state of the parent component
+        setInCart(true); // update the state of the current component
+    };
 
     return ( 
         <div className="Product-Item" id={product.id}>
@@ -25,10 +34,12 @@ function ProductItem({product, isUserLoggedIn}) {
                         <button 
                         disabled
                         style={{backgroundColor: 'gray', cursor: 'auto'}}
-                        >Added to Cart</button>
+                        >
+                            Added to Cart
+                        </button>
                     </div> :
                     <div className="Product-Item-Btn">
-                        <button onClick={() => setInCart(true)}>Add to Cart</button>
+                        <button onClick={handleAddToCart}>Add to Cart</button>
                     </div>
                 )
             }
