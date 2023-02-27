@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import bcrypt from "bcrypt";
-import cors from "cors";
+// import cors from "cors";
 import db from "./db.js";
 
 dotenv.config({ path: "./server/.env" });
@@ -9,14 +9,14 @@ dotenv.config({ path: "./server/.env" });
 const port = process.env.PORT || 5000;
 const app = express();
 
-app.use(
-  cors({
-    origin: "http://localhost:3001",
-  })
-);
+// app.use(
+//   cors({
+//     origin: "http://localhost:3001",
+//   })
+// );
 
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static("build"));
 
 app.route("/users/login").post(async (req, res) => {
   const { body } = req;
