@@ -41,7 +41,10 @@ app.route("/users/login").post(async (req, res) => {
           if (shoppingCartDate > currentDate - expirationTwoWeeks) {
             res.status(200).json({
               validation: true,
-              data: data.rows,
+              data: {
+                user_id: data.rows[0].user_id,
+                firstname: data.rows[0].firstname,
+              },
               cartData: cartData.rows[0].products,
             });
           } else {
@@ -53,9 +56,14 @@ app.route("/users/login").post(async (req, res) => {
             await db.query(
               `INSERT INTO carts (user_id, date, products) VALUES (${data.rows[0].user_id}, '${currentDate}', '[]')`
             );
-            res
-              .status(200)
-              .json({ validation: true, data: data.rows, cartData: [] });
+            res.status(200).json({
+              validation: true,
+              data: {
+                user_id: data.rows[0].user_id,
+                firstname: data.rows[0].firstname,
+              },
+              cartData: [],
+            });
           }
         } else {
           // No cart exists, will create a cart with a current time stamp
@@ -63,9 +71,14 @@ app.route("/users/login").post(async (req, res) => {
           await db.query(
             `INSERT INTO carts (user_id, date, products) VALUES (${data.rows[0].user_id}, '${currentDate}', '[]')`
           );
-          res
-            .status(200)
-            .json({ validation: true, data: data.rows, cartData: [] });
+          res.status(200).json({
+            validation: true,
+            data: {
+              user_id: data.rows[0].user_id,
+              firstname: data.rows[0].firstname,
+            },
+            cartData: [],
+          });
         }
       } else {
         res
@@ -83,11 +96,13 @@ app.route("/users/login").post(async (req, res) => {
 app.route("/users/signup").post(async (req, res) => {
   const { body } = req;
   try {
+    // Encrypting password for database insertion
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(body.password, salt);
     await db.query(
       `INSERT INTO users (email, username, password, firstname, lastname) VALUES ('${body.email}', '${body.username}', '${hashedPassword}', '${body.firstname}', '${body.lastname}');`
     );
+    // Database query for user_id and firstname
     const data = await db.query(
       `SELECT user_id, firstname FROM users WHERE username = '${body.username}'`
     );
@@ -97,6 +112,16 @@ app.route("/users/signup").post(async (req, res) => {
       `INSERT INTO carts (user_id, date, products) VALUES (${data.rows[0].user_id}, '${currentDate}', '[]')`
     );
     res.status(200).json({ validation: true, data: data.rows, cartData: [] });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+app.route("/users/delete/:uid").delete(async (req, res) => {
+  const { uid } = req.params;
+  try {
+    await db.query(`DELETE FROM users WHERE user_id = ${uid}`);
+    res.status(204).send();
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

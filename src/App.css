@@ -28,16 +28,27 @@ body {
     user-select: none; /* Standard syntax */
 }
 
+.Store-Title {
+  padding-left: 20px;
+  font-family: 'Kaushan Script', cursive;
+}
+
+.Nav-Bar-Welcome p{
+  width: 300px;
+  font-size: 14px;
+  text-align: right;
+  padding: 20px 35px 0 0;
+}
+
+.Nav-Bar-Welcome b {
+  cursor: pointer;
+}
+
 .Nav-Bar-User-Login,
 .Nav-Bar-Sign-Up,
 .Nav-Bar-Shopping-Cart {
   padding: 20px 30px 0 0;
   cursor: pointer;
-}
-
-.Store-Title {
-  padding-left: 20px;
-  font-family: 'Kaushan Script', cursive;
 }
 
 .Nav-Bar-Links {
@@ -384,13 +395,6 @@ body {
   cursor: pointer;
 }
 
-.Nav-Bar-Welcome p{
-  width: 300px;
-  font-size: 14px;
-  text-align: right;
-  padding: 20px 35px 0 0;
-}
-
 .Login-Error {
   font-family: 'Times New Roman', Times, serif;
   font-size: 11px;
@@ -419,4 +423,77 @@ body {
 .fa-eye-slash {
   cursor: pointer;
   color: lightgray;
+}
+
+.User-Forgot-Password-Form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 30%;
+  left: 41%;
+  width: 400px;
+  height: 300px;
+  border: 2px solid black;
+  border-radius: 5px;
+  box-shadow: 2px 2px 1px 1px rgb(190, 190, 190);
+  background-color: #f5f5fa;
+  z-index: 1;
+  text-align: center;
+}
+
+.User-Forgot-Password-Form h2 {
+  margin-top: 25px;
+  margin-bottom: 35px;
+}
+
+.User-Forgot-Password-Form p {
+  font-size: 12px;
+  margin-bottom: 20px;
+}
+
+.User-Forgot-Password-Form input {
+  width: 200px;
+  height: 30px;
+  padding-left: 5px;
+  outline: none;
+  border-radius: 4px;
+  margin-bottom: 5px;
+}
+
+.User-Forgot-Password-Form form button {
+  outline: none;
+  margin-top: 20px;
+  padding: 2px 10px;
+  cursor: pointer;
+}
+
+.Email-Error {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 11px;
+  height: 10px;
+  color: red;
+  margin-left: 3px;
+  margin-bottom: 15px;
+}
+
+.User-Delete-Account-Container {
+  position: absolute;
+  top: 50px;
+  right: 120px;
+  width: 200px;
+  height: 30px;
+  border-radius: 0 0 4px 4px;
+  background-color: #1f1f29;
+  text-align: center;
+}
+
+.User-Delete-Account-Container button {
+  outline: none;
+  border: none;
+  padding: 2px 9px;
+  border-radius: 4px;
+  color: white;
+  background-color: red;
+  cursor: pointer;
 }

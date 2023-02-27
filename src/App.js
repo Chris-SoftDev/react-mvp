@@ -5,6 +5,8 @@ import ProductListing from "./components/ProductListing.jsx";
 import ShoppingCart from "./components/ShoppingCart.jsx";
 import LogIn from "./components/LogIn.jsx";
 import SignUp from "./components/Signup.jsx";
+import ForgotPassword from "./components/ForgotPassword.jsx";
+import DeleteAccount from "./components/DeleteAccount.jsx";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -13,7 +15,11 @@ function App() {
   const [isShoppingCartVisible, setIsShoppingCartVisible] = useState(false);
   const [isLoginFormVisible, setIsLoginFormVisible] = useState(false);
   const [isSignupFormVisible, setIsSignupFormVisible] = useState(false);
+  const [isForgotPasswordFormVisible, setIsForgotPasswordFormVisible] =
+    useState(false);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [isUserDeleteAccountVisible, setIsUserDeleteAccountVisible] =
+    useState(false);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -45,19 +51,12 @@ function App() {
     isUserLoggedIn && updateUserShoppingCart();
   }, [isUserLoggedIn, currentUser, currentShoppingCart]);
 
-  // Disables vertical scroll-bar when Login window is visible
+  // Disables vertical scroll-bar when either Login/Signup/ForgotPassword window is visible
   useEffect(() => {
-    isLoginFormVisible
+    isLoginFormVisible || isSignupFormVisible || isForgotPasswordFormVisible
       ? (document.body.style.overflow = "hidden")
       : (document.body.style.overflow = "auto");
-  }, [isLoginFormVisible]);
-
-  // Disables vertical scroll-bar when Signup window is visible
-  useEffect(() => {
-    isSignupFormVisible
-      ? (document.body.style.overflow = "hidden")
-      : (document.body.style.overflow = "auto");
-  }, [isSignupFormVisible]);
+  }, [isLoginFormVisible, isSignupFormVisible, isForgotPasswordFormVisible]);
 
   return (
     <div className="App">
@@ -70,12 +69,16 @@ function App() {
           isUserLoggedIn={isUserLoggedIn}
           setIsUserLoggedIn={setIsUserLoggedIn}
           setIsLoginFormVisible={setIsLoginFormVisible}
+          isUserDeleteAccountVisible={isUserDeleteAccountVisible}
+          setIsUserDeleteAccountVisible={setIsUserDeleteAccountVisible}
         />
       </div>
       <div
         className="Store-Front-Container"
         style={
-          isLoginFormVisible || isSignupFormVisible
+          isLoginFormVisible ||
+          isSignupFormVisible ||
+          isForgotPasswordFormVisible
             ? { opacity: "10%" }
             : { opacity: "100%" }
         }
@@ -122,6 +125,7 @@ function App() {
             setIsLoginFormVisible={setIsLoginFormVisible}
             setIsSignupFormVisible={setIsSignupFormVisible}
             setCurrentShoppingCart={setCurrentShoppingCart}
+            setIsForgotPasswordFormVisible={setIsForgotPasswordFormVisible}
           />
         </div>
       )}
@@ -132,6 +136,24 @@ function App() {
             setIsUserLoggedIn={setIsUserLoggedIn}
             setIsSignupFormVisible={setIsSignupFormVisible}
             setCurrentShoppingCart={setCurrentShoppingCart}
+          />
+        </div>
+      )}
+      {isForgotPasswordFormVisible && (
+        <div className="User-Forgot-Password-Form">
+          <ForgotPassword
+            setIsForgotPasswordFormVisible={setIsForgotPasswordFormVisible}
+          />
+        </div>
+      )}
+      {isUserDeleteAccountVisible && (
+        <div className="User-Delete-Account-Container">
+          <DeleteAccount
+            currentUser={currentUser}
+            setCurrentUser={setCurrentUser}
+            setIsUserLoggedIn={setIsUserLoggedIn}
+            setIsUserDeleteAccountVisible={setIsUserDeleteAccountVisible}
+            setIsShoppingCartVisible={setIsShoppingCartVisible}
           />
         </div>
       )}

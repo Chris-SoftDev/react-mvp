@@ -1,10 +1,15 @@
-function NavBar({currentUser, currentShoppingCart, isShoppingCartVisible, setIsShoppingCartVisible, isUserLoggedIn, setIsUserLoggedIn, setIsLoginFormVisible}) {
+function NavBar({currentUser, currentShoppingCart, isShoppingCartVisible, setIsShoppingCartVisible, isUserLoggedIn, setIsUserLoggedIn, setIsLoginFormVisible, isUserDeleteAccountVisible, setIsUserDeleteAccountVisible}) {
     
     const toggleShowShoppingCart = () => {
         setIsShoppingCartVisible(!isShoppingCartVisible)
     }
 
+    const toggleShowDeleteAccount = () => {
+        setIsUserDeleteAccountVisible(!isUserDeleteAccountVisible)
+    }
+
     const setUserLoggedOut = () => {
+        setIsUserDeleteAccountVisible(false)
         setIsShoppingCartVisible(false)
         setIsUserLoggedIn(false)
     }
@@ -25,7 +30,7 @@ function NavBar({currentUser, currentShoppingCart, isShoppingCartVisible, setIsS
                 {(isUserLoggedIn) ?
                     <>
                         <div className="Nav-Bar-Welcome">
-                            <p>Welcome, {currentUser.firstname}!</p>
+                            <p>Welcome, <b onClick={toggleShowDeleteAccount}>{currentUser.firstname}</b>!</p>
                         </div>
                         <div className="Nav-Bar-Shopping-Cart">
                             <i className="fa fa-shopping-cart" onClick={toggleShowShoppingCart}>

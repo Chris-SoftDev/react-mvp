@@ -10,7 +10,7 @@ function ProductItem({product, isUserLoggedIn, currentShoppingCart, setCurrentSh
     }
 
     const escapeSpecialChars = (str) => {
-        return str.replace(/'/g, "\\'");
+        return str.replace(/'/g, "''");
     }
 
     const searchId = (id, cart) => {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function LogIn({setCurrentUser, setIsUserLoggedIn, setIsLoginFormVisible, setIsSignupFormVisible, setCurrentShoppingCart}) {
+function LogIn({setCurrentUser, setIsUserLoggedIn, setIsLoginFormVisible, setIsSignupFormVisible, setCurrentShoppingCart, setIsForgotPasswordFormVisible}) {
     const [showPassword, setShowPassword] = useState(false);
     const [loginError, setLoginError] = useState('')
     const [formData, setFormData] = useState({
@@ -42,7 +42,7 @@ function LogIn({setCurrentUser, setIsUserLoggedIn, setIsLoginFormVisible, setIsS
         const sqlQuery = await response.json()
         if (sqlQuery.validation) {
             clearForm()
-            setCurrentUser(sqlQuery.data[0])
+            setCurrentUser(sqlQuery.data)
             setIsLoginFormVisible(false)
             setIsUserLoggedIn(true)
             setCurrentShoppingCart(sqlQuery.cartData)
@@ -70,7 +70,7 @@ function LogIn({setCurrentUser, setIsUserLoggedIn, setIsLoginFormVisible, setIsS
                     <i className={showPassword ?  "fa fa-eye" : "fa fa-eye-slash"} onClick={toggleShowPassword}></i>
                 </div>
                 <div className='User-Login-Form-Links'>
-                    <div className='Link-Hover'>Forgot Password?</div>
+                    <div className='Link-Hover' onClick={() => {setIsForgotPasswordFormVisible(true); setIsLoginFormVisible(false)}}>Forgot Password?</div>
                     <div className='Link-Hover' onClick={() => {setIsSignupFormVisible(true); setIsLoginFormVisible(false)}}>Sign-Up</div>
                 </div>
                 <button type="submit">Login</button>
