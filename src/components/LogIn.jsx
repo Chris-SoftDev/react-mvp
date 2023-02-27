@@ -38,7 +38,7 @@ function LogIn({setCurrentUser, setIsUserLoggedIn, setIsLoginFormVisible, setIsS
             body: JSON.stringify(formData)
         }
 
-        const response = await fetch(`http://localhost:3000/users/login`, options)
+        const response = await fetch(`/users/login`, options)
         const sqlQuery = await response.json()
         if (sqlQuery.validation) {
             clearForm()

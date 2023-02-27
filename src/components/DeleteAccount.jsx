@@ -7,7 +7,7 @@ function DeleteAccount({currentUser, setCurrentUser, setIsUserLoggedIn, setIsUse
                 method: 'DELETE',
             }
     
-            await fetch(`http://localhost:3000/users/delete/${currentUser.user_id}`, options)        
+            await fetch(`/users/delete/${currentUser.user_id}`, options)        
             setCurrentUser({})
             setIsUserDeleteAccountVisible(false)        
             setIsShoppingCartVisible(false)

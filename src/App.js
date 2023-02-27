@@ -45,7 +45,7 @@ function App() {
         }),
       };
 
-      await fetch(`http://localhost:3000/cart/update`, options);
+      await fetch(`/cart/update`, options);
     };
 
     isUserLoggedIn && updateUserShoppingCart();

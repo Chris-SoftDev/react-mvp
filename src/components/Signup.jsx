@@ -43,7 +43,7 @@ function SignUp({setCurrentUser, setIsUserLoggedIn, setIsSignupFormVisible, setC
             body: JSON.stringify(formData)
         }
 
-        const response = await fetch(`http://localhost:3000/users/signup`, options)
+        const response = await fetch(`/users/signup`, options)
         const sqlQuery = await response.json()
         if (sqlQuery.validation) {
             clearForm()
